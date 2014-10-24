@@ -73,7 +73,12 @@ function parseError(xml, tag, tag_linc, tag_view, name){
     for (var i = 0; i < col; i++) {
         var s = "";
         el = xml.getElementsByTagName(tag)[i];
-        s = i + 1 + ")" +"  Code " + el.getAttribute("code") +" : "+ el.getAttribute("text") ;
+        if (tag == "error"){
+            s = i + 1 + ")" + "  Code " + el.getAttribute("code") + " : " + el.getAttribute("text");
+        }
+        if (tag == "warning"){
+            s = i + 1 + ")" +  el.getAttribute("text");
+        }
         document.getElementById(tag_view).innerHTML += s + "<br>";
     }
     el = xml.getElementsByTagName(tag);
