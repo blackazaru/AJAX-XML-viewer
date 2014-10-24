@@ -1,0 +1,22 @@
+.popup{
+    height: auto;
+    min-width: 400px;
+    position: absolute;
+    background: rgba(13, 33, 77, 0.11);
+}
+
+a{
+    cursor: pointer;
+}
+
+pre{
+    white-space: pre-wrap;
+}
+
+.div1{
+    margin: 1%;
+}
+
+.info_panel{
+    background: #fffddb;
+}

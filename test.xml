@@ -1,0 +1,8 @@
+<data>
+    <errors>Error - 1</errors>
+    <error text="error!!!" code="#1"/>
+    <error text="error!!!blabla" code="#2"/>
+    <warning text="You are not close tag div"/>
+    <warning text="1231 asdasfas fsfsdfdf sd s"/>
+    <rel>reasd</rel>
+</data>
