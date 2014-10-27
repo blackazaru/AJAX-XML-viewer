@@ -99,7 +99,7 @@ function parceXML(text) {
     parseError(xml, "error", "errors", "error_view","Error");
     parseError(xml, "warning", "warnings", "warnings_view","Warnings");
     nodes=xml.childNodes;
-    console.log(nodes);
+
     xmlString = highLightXML(nodes, "");
     return xmlString;
 }
@@ -122,7 +122,7 @@ function wrap(value, span_class) {
 function NodeInText(node){
     attrs = node.attributes;
     result = wrap(node.nodeName, "tag") + (attrs.length > 0 ? " " : "");
-    console.log(attrs);
+
     for(var i = 0; i<attrs.length; i++){
         result += wrap(attrs[i].nodeName,"attr");
         result += "=";
@@ -151,7 +151,7 @@ function highLightXML(nodes, offset){
             result += offset +  wrap("<!-- " +nodes[i].nodeValue+ " --> \n" ,"comment");;
         }
     }
-    console.log(result);
+
     return result
 }
 

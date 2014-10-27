@@ -5,12 +5,10 @@
 function show(id){
     var obj = document.getElementById(id);
     if (obj.style.display == "none"){
-        console.log("Show "+id);
         obj.style.display = "block";
         return 0
     }
     if (obj.style.display == "block"){
-        console.log("Show-Hide "+id);
         hide(id)
         return 0
     }
@@ -18,7 +16,6 @@ function show(id){
 
 function hide(id){
     var obj = document.getElementById(id);
-    console.log("Hide "+id);
     obj.style.display = "none";
 }
 
