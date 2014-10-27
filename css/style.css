@@ -19,4 +19,28 @@ pre{
 
 .info_panel{
     background: #fffddb;
+    min-height: auto;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.head{
+    background: rgb(55, 162, 239);
+    min-width: 400px;
+    height: 20px;
+}
+
+.tag{
+    color: #ff00c2;
+}
+.attr{
+    color: #0042ff;
+}
+
+.attr_value{
+    color: #0f8b07;
+}
+
+.comment{
+    color: #b7b7ba;
 }

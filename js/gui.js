@@ -34,15 +34,24 @@ function createPopup(){
     return popup;
 }
 
+function cteateHead(){
+    var head = createDiv("head");
+    head.className = "head";
+    return head
+}
+
 function createInputBar(){
     var input_bar = createDiv();
     input_bar.className = "div1";
     var input = createInput("input");
     input.setAttribute("placeholder","file.xml");
     var buttonGet = createButton("Get");
-    buttonGet.setAttribute("onclick", "loadXMLDoc();");
+    buttonGet.setAttribute("onclick", "loadXMLDoc('GET');");
+    var buttonPost = createButton("Post");
+    buttonPost.setAttribute("onclick", "loadXMLDoc('POST');");
     place(input_bar, input);
     place(input_bar, buttonGet);
+    place(input_bar, buttonPost);
     return input_bar
 }
 
@@ -53,21 +62,21 @@ function createViewBar(){
 
     var link_xml = createLink("XML - 0");
     link_xml.id = "xml";
-    link_xml.setAttribute("onclick","show_hide('xml_view')");
+    link_xml.setAttribute("onclick","show('xml_view');hide('error_view');hide('warnings_view')");
     place(view_bar, link_xml);
     place(view_bar, document.createTextNode(" | "));
 
 
     var link_errors = createLink("Errors - 0");
     link_errors.id = "errors";
-    link_errors.setAttribute("onclick","show_hide('error_view')");
+    link_errors.setAttribute("onclick","show('error_view');hide('xml_view');hide('warnings_view')");
     place(view_bar, link_errors);
     place(view_bar, document.createTextNode(" | "));
 
 
     var link_warnings = createLink("Warnings - 0");
     link_warnings.id = "warnings";
-    link_warnings.setAttribute("onclick","show_hide('warnings_view')");
+    link_warnings.setAttribute("onclick","show('warnings_view');hide('xml_view');hide('error_view')");
     place(view_bar, link_warnings);
 
     return view_bar

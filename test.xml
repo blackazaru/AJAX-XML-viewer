@@ -1,5 +1,7 @@
+<!--  Edited by XMLSpy  -->
+<!--  Edited by XMLSpy  -->
 <data>
-    <errors>Error - 1</errors>
+    <errors type="error">Error - 1</errors>
     <error text="error!!!" code="#1"/>
     <error text="error!!!blabla" code="#2"/>
     <warning text="You are not close tag div"/>

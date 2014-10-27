@@ -73,7 +73,12 @@ function parseError(xml, tag, tag_linc, tag_view, name){
     for (var i = 0; i < col; i++) {
         var s = "";
         el = xml.getElementsByTagName(tag)[i];
-        s = i + 1 + ")" +"  Code " + el.getAttribute("code") +" : "+ el.getAttribute("text") ;
+        if (tag == "error"){
+            s = i + 1 + ")" + "  Code " + el.getAttribute("code") + " : " + el.getAttribute("text");
+        }
+        if (tag == "warning"){
+            s = i + 1 + ")" +  el.getAttribute("text");
+        }
         document.getElementById(tag_view).innerHTML += s + "<br>";
     }
     el = xml.getElementsByTagName(tag);
@@ -93,8 +98,60 @@ function parceXML(text) {
 
     parseError(xml, "error", "errors", "error_view","Error");
     parseError(xml, "warning", "warnings", "warnings_view","Warnings");
+    nodes=xml.childNodes;
 
+    xmlString = highLightXML(nodes, "");
+    return xmlString;
+}
+/**
+ * Create <span class="span_class">value</span>
+ * @param value
+ * @param span_class
+ * @returns {string}
+ */
+function wrap(value, span_class) {
+    return "<span class='" + span_class + "'>" + escapeHtml(value) + "</span>";
+}
 
-    return new XMLSerializer().serializeToString(xml);
+/**
+ * Colors attr and they value
+ * @param node
+ * @returns {string|*}
+ * @constructor
+ */
+function NodeInText(node){
+    attrs = node.attributes;
+    result = wrap(node.nodeName, "tag") + (attrs.length > 0 ? " " : "");
+
+    for(var i = 0; i<attrs.length; i++){
+        result += wrap(attrs[i].nodeName,"attr");
+        result += "=";
+        result += wrap('"' + node.getAttribute(attrs[i].nodeName) + '"', "attr_value");
+    }
+
+    return result
+}
+
+/**
+ * Colors code
+ * @param nodes
+ * @param offset
+ * @returns {string}
+ */
+function highLightXML(nodes, offset){
+    var result = '';
+    for(var i = 0; i < nodes.length; i++){
+        if (nodes[i].hasChildNodes()){
+            result += offset + "&lt;" + NodeInText(nodes[i]) + "&gt; \n";
+            result += highLightXML(nodes[i].childNodes, offset + "  ");
+            result += offset + "&lt;&#x2F;" + wrap(nodes[i].nodeName, "tag") + "&gt; \n";
+        }else if (nodes[i].nodeName == "#text" &&(!(!nodes[i].nodeValue || /^\s*$/.test(nodes[i].nodeValue)))){
+            result += offset  + wrap(nodes[i].nodeValue, "text_code") + "\n";
+        } else if(nodes[i].nodeName == "#comment") {
+            result += offset +  wrap("<!-- " +nodes[i].nodeValue+ " --> \n" ,"comment");;
+        }
+    }
+
+    return result
 }
 

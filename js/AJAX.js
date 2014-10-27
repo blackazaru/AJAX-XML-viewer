@@ -17,7 +17,7 @@ function clear_view() {
 
 
 
-function loadXMLDoc() {
+function loadXMLDoc(request) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -28,7 +28,7 @@ function loadXMLDoc() {
         if (xmlhttp.readyState == 4 && tryParseXML(xmlhttp.responseText) == true) {
             if (xmlhttp.status == 200) {
                 clear_view();
-                document.getElementById("value").innerHTML = escapeHtml(parceXML(xmlhttp.responseText));
+                document.getElementById("value").innerHTML = parceXML(xmlhttp.responseText);
                 document.getElementById("xml").textContent = "XML - " + xmlhttp.responseText.length;
                 document.getElementById("status").innerHTML = "Status : Ok";
             }
@@ -37,7 +37,8 @@ function loadXMLDoc() {
             document.getElementById("status").innerHTML = "Status : INVALID";
         }
     }
-    xmlhttp.open("GET", document.getElementById("input").value, true);
+
+    xmlhttp.open(request, document.getElementById("input").value, true);
     xmlhttp.send();
 
 }
