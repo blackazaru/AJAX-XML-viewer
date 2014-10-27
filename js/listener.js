@@ -2,13 +2,24 @@
  * Show or hide the element by id
  * @param id
  */
-function show_hide(id){
+function show(id){
     var obj = document.getElementById(id);
     if (obj.style.display == "none"){
+        console.log("Show "+id);
         obj.style.display = "block";
-    }else{
-        obj.style.display = "none";
+        return 0
     }
+    if (obj.style.display == "block"){
+        console.log("Show-Hide "+id);
+        hide(id)
+        return 0
+    }
+}
+
+function hide(id){
+    var obj = document.getElementById(id);
+    console.log("Hide "+id);
+    obj.style.display = "none";
 }
 
 /**
@@ -17,22 +28,20 @@ function show_hide(id){
  */
 function initDragListener(Id) {
     var element = document.getElementById(Id);
+    var element_popup = document.getElementById("popup");
     var offset = {x: 0, y: 0};
 
     function mouseDown(e) {
-        offset.x = e.clientX - element.style.left.replace("px", "");
-        offset.y = e.clientY - element.style.top.replace("px", "");
+        offset.x = e.clientX - element_popup.style.left.replace("px", "");
+        offset.y = e.clientY - element_popup.style.top.replace("px", "");
         window.addEventListener("mousemove", elementMove, true);
     }
 
     function elementMove(e) {
-        // Do not drag when current active element is input or button
-        if ( document.activeElement !== document.getElementById("input") ) {
-            var div = element;
-            div.style.position = "absolute";
-            div.style.top = e.clientY - offset.y + "px";
-            div.style.left = e.clientX - offset.x + "px";
-        }
+        var div = element_popup;
+        div.style.position = "absolute";
+        div.style.top = e.clientY - offset.y + "px";
+        div.style.left = e.clientX - offset.x + "px";
     }
 
     function mouseUp() {

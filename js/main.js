@@ -3,6 +3,7 @@
  */
 window.onload=function(){
     popup = createPopup();
+    head = cteateHead();
     input_bar = createInputBar();
     view_bar = createViewBar();
     status_bar = createStatusBar();
@@ -10,6 +11,7 @@ window.onload=function(){
     error_view = createErrorView();
     warnings_view = createWarningView();
 
+    place(popup, head);
     place(popup, input_bar);
     place(popup, view_bar);
     place(popup, status_bar);
@@ -18,5 +20,5 @@ window.onload=function(){
     place(popup, warnings_view);
 
     place(document.body, popup);
-    initDragListener("popup");
+    initDragListener("head");
 };
